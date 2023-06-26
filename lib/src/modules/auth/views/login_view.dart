@@ -90,9 +90,29 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(
                     height: 200,
                   ),
-                  buildTextRegisterLogIn(
-                    'Não possui cadastro?',
-                    'cadastre-se',
+                  //buildTextRegisterLogIn(
+                  //'Não possui cadastro?',
+                  //'cadastre-se',
+                  //),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Não possui cadastro?'),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, '/signup-view');
+                        },
+                        child: const Text(
+                          "cadastre-se",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color(0xFF116B67),
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),

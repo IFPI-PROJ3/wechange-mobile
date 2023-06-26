@@ -16,7 +16,7 @@ class _ProfileViewState extends State<NgoProfileView> {
 
   Future<void> logout() async {
     await AuthService.logOut();
-    Navigator.pushReplacementNamed(context, '/');
+    Navigator.pushReplacementNamed(context, '/signin-view');
   }
 
   @override

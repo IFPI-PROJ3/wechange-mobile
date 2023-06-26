@@ -29,7 +29,7 @@ Widget buildTextTitle(
 ) {
   return Text(
     text,
-    style: const TextStyle(fontSize: 50, fontWeight: FontWeight.w700),
+    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
     textAlign: TextAlign.center,
   );
 }

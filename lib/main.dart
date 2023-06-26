@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/auth/models/user_status.dart';
+import 'package:wechange_mobile/src/modules/auth/views/ngo_signup_view.dart';
+import 'package:wechange_mobile/src/modules/auth/views/signup_view.dart';
+import 'package:wechange_mobile/src/modules/auth/views/volunteer_signup_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
 import 'package:wechange_mobile/src/modules/volunteer/views/volunteer_home_view.dart';
 import 'package:wechange_mobile/src/modules/volunteer/views/volunteer_view.dart';
@@ -41,8 +44,12 @@ class MyApp extends StatelessWidget {
         },
       ),
       routes: {
+        '/signin-view': (context) => const LoginView(),
         '/ngo-view': (context) => const NgoView(),
         '/volunteer-view': (context) => const VolunteerView(),
+        '/signup-view': (context) => const SignUpView(),
+        '/signup-ngo': (context) => const NgoSignUpView(),
+        '/signup-volunteer': (context) => const VolunteerSignUpView()
       },
     );
   }

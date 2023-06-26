@@ -59,6 +59,9 @@ class AuthService {
   }
 
   static Future<UserStatus?> signUpNgo(SignUpNgo signUpNgo) async {
+    developer.log("cheguemo");
+    developer.log("cheguemo1");
+
     final response = await Dio().post(
       "${ApiParams.apiBaseUrl}/auth/signup-ngo",
       data: signUpNgo.toJson(),
