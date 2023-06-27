@@ -44,31 +44,44 @@ class _LoginViewState extends State<LoginView> {
           child: Center(
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.center,
+
                 children: [
                   const SizedBox(
-                    height: 128,
+                    height: 50,
                   ),
-                  const SizedBox(height: 20),
+
+                  const Image(
+                    image: AssetImage('/home/alunos/Documentos/wechange-mobile-1/lib/src/assets/logo.png'),
+                  ),
+
+                  const SizedBox(height: 120),
+                  
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
                       labelText: 'E-mail',
                       hintText: 'Digite seu email',
                     ),
                   ),
+
                   const SizedBox(height: 10),
+
                   TextFormField(
                     controller: _passwordController,
                     keyboardType: TextInputType.visiblePassword,
                     decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
                       labelText: 'Senha',
                       hintText: 'Digite sua senha',
                     ),
                     obscureText: true,
                   ),
+
                   const SizedBox(height: 5),
+
                   Container(
                     height: 20,
                     alignment: Alignment.centerRight,
@@ -79,14 +92,25 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                   ),
+
                   const SizedBox(
                     height: 20,
                   ),
+
                   ElevatedButton(
-                    style: buildConfirmStyleButton,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
+                      shape: const StadiumBorder(),
+                      shadowColor: Colors.black,
+                      side: const BorderSide( 
+                        width: 1.0,
+                        color: Colors.black,
+                      ),  
+                    ),
                     onPressed: signIn,
                     child: buildTextButton('Entrar'),
                   ),
+
                   const SizedBox(
                     height: 200,
                   ),
@@ -97,18 +121,17 @@ class _LoginViewState extends State<LoginView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Não possui cadastro?'),
+                      const Text('Não possui cadastro? '),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushReplacementNamed(context, '/signup-view');
                         },
                         child: const Text(
-                          "cadastre-se",
+                          'Cadastre-se',
                           style: TextStyle(
                             fontSize: 15,
                             color: Color(0xFF116B67),
                             fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
                           ),
                         ),
                       )
