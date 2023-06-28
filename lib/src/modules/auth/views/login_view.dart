@@ -21,7 +21,8 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void signIn() async {
-    UserStatus? userStatus = await AuthService.signIn(_emailController.text, _passwordController.text);
+    UserStatus? userStatus = await AuthService.signIn(
+        _emailController.text, _passwordController.text);
 
     if (userStatus == null) {
       return;
@@ -45,18 +46,18 @@ class _LoginViewState extends State<LoginView> {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-
                 children: [
                   const SizedBox(
                     height: 50,
                   ),
 
                   const Image(
-                    image: AssetImage('/home/alunos/Documentos/wechange-mobile-1/lib/src/assets/logo.png'),
+                    image: AssetImage(
+                        '/home/alunos/Documentos/wechange-mobile-1/lib/src/assets/logo.png'),
                   ),
 
                   const SizedBox(height: 120),
-                  
+
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -99,13 +100,14 @@ class _LoginViewState extends State<LoginView> {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 100.0, vertical: 20.0),
                       shape: const StadiumBorder(),
                       shadowColor: Colors.black,
-                      side: const BorderSide( 
+                      side: const BorderSide(
                         width: 1.0,
                         color: Colors.black,
-                      ),  
+                      ),
                     ),
                     onPressed: signIn,
                     child: buildTextButton('Entrar'),

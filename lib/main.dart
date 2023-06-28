@@ -10,6 +10,7 @@ import 'package:wechange_mobile/src/styles/theme_we_change.dart';
 import 'src/modules/auth/services/auth_service.dart';
 import 'src/modules/auth/views/login_view.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'We Change',
+      title: 'We Change: Uma aplicação para aqueles que mudam o mundo',
       debugShowCheckedModeBanner: false,
       theme: default_theme,
       home: FutureBuilder<UserStatus?>(
