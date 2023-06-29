@@ -53,10 +53,10 @@ class _LoginViewState extends State<LoginView> {
 
                   const Image(
                     image: AssetImage(
-                        '/home/alunos/Documentos/wechange-mobile-1/lib/src/assets/logo.png'),
+                        '/home/alunos/Downloads/wechange-mobile-1/lib/src/assets/logo.png'),
                   ),
 
-                  const SizedBox(height: 120),
+                  const SizedBox(height: 50),
 
                   TextFormField(
                     controller: _emailController,
@@ -101,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 100.0, vertical: 20.0),
+                          horizontal: 75.0, vertical: 10.0),
                       shape: const StadiumBorder(),
                       shadowColor: Colors.black,
                       side: const BorderSide(
@@ -114,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
 
                   const SizedBox(
-                    height: 200,
+                    height: 100,
                   ),
                   //buildTextRegisterLogIn(
                   //'Não possui cadastro?',

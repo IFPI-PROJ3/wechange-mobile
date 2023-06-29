@@ -6,6 +6,8 @@ import 'package:wechange_mobile/matsallz/methods/methods.dart';
 import 'package:wechange_mobile/src/modules/auth/models/signup_ngo.dart';
 import 'package:wechange_mobile/src/modules/auth/services/auth_service.dart';
 import 'dart:developer' as developer;
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class NgoSignUpView extends StatefulWidget {
   const NgoSignUpView({super.key});
@@ -67,6 +69,22 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
     return location;
   }
 
+  ImagePicker imagePicker = ImagePicker();
+  File? selectedImage;
+
+  // Houve uma atualização, alterem o PickedFile image = await _picker.getImage(...) para XFile image = await _picker.pickImage(...)
+  selectImageFromGallery() async {
+    final XFile? imageTemp = await imagePicker.pickImage(
+      source: ImageSource.gallery
+    );
+
+    if (imageTemp != null) {
+      setState(() {
+        selectedImage = File(imageTemp.path);
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -90,7 +108,35 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 buildTextTitle('Cadastro'),
+
+                selectedImage == null 
+                  ? IconButton(
+                    onPressed: selectImageFromGallery , 
+                    icon: const Icon(Icons.camera_alt)
+                  )
+                  : Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: CircleAvatar(
+                      backgroundImage: FileImage(selectedImage!),
+                      radius: 50,
+                      //child: Image.file(selectedImage!),
+                    ),
+                  ),
+                  
+                  //Image.file(selectedImage!),
+
+                  //CircleAvatar(backgroundImage: new FileImage(_image), radius: 200.0,),
+      
+
+                /*
+                IconButton(
+                  onPressed: selectImageFromGallery , 
+                  icon: const Icon(Icons.supervised_user_circle)
+                ),
+                */
+
                 const SizedBox(height: 20),
+
                 TextFormField(
                   controller: _usernameController,
                   keyboardType: TextInputType.text,
@@ -105,7 +151,9 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
+
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -120,7 +168,9 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
+
                 TextFormField(
                   controller: _passwordController,
                   keyboardType: TextInputType.visiblePassword,
@@ -135,7 +185,9 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
+
                 TextFormField(
                   controller: _nameController,
                   keyboardType: TextInputType.name,
@@ -150,7 +202,9 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
+
                 TextFormField(
                   controller: _descriptionController,
                   keyboardType: TextInputType.text,
@@ -165,13 +219,16 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
+
                 Row(
                   children: [
                     ElevatedButton(onPressed: _getLocation, child: const Icon(Icons.location_on)),
-                    Text(""),
+                    const Text(""),
                   ],
                 ),
+
                 const SizedBox(height: 20),
                 ElevatedButton(onPressed: _signUp, child: const Text('Cadastrar'))
               ],

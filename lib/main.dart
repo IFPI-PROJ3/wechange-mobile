@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'We Change: Uma aplicação para aqueles que mudam o mundo',
       debugShowCheckedModeBanner: false,
-      theme: default_theme,
+      theme: defaultTheme,
       home: FutureBuilder<UserStatus?>(
         future: AuthService.getCurrentUser(),
         builder: (BuildContext context, AsyncSnapshot<UserStatus?> snapshot) {
