@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData default_theme = ThemeData(
+ThemeData defaultTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.all(Colors.white),
