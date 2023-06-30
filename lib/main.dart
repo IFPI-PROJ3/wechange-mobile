@@ -1,15 +1,17 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/auth/models/user_status.dart';
 import 'package:wechange_mobile/src/modules/auth/views/ngo_signup_view.dart';
 import 'package:wechange_mobile/src/modules/auth/views/signup_view.dart';
+// Splash Screen
 import 'package:wechange_mobile/src/modules/auth/views/volunteer_signup_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
 import 'package:wechange_mobile/src/modules/volunteer/views/volunteer_home_view.dart';
 import 'package:wechange_mobile/src/modules/volunteer/views/volunteer_view.dart';
 import 'package:wechange_mobile/src/styles/theme_we_change.dart';
+import 'matsallz/pages/login.dart';
 import 'src/modules/auth/services/auth_service.dart';
 import 'src/modules/auth/views/login_view.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'We Change: Uma aplicação para aqueles que mudam o mundo',
+      title: 'We Change',
       debugShowCheckedModeBanner: false,
       theme: defaultTheme,
       home: FutureBuilder<UserStatus?>(
@@ -41,9 +43,20 @@ class MyApp extends StatelessWidget {
             return loadUserHome();
           } else {
             return const LoginView();
+            //pageTransitionType: PageTransitionsType.scale,;
           }
         },
       ),
+
+      /*
+      AnimatedSplashScreen(
+        splash: '/home/alunos/Documentos/wechange-mobile-1/lib/src/assets/logo.png',
+        nextScreen: const LoginPage(),
+        duration: 2000,
+        splashTransition: SplashTransition.fadeTransition,
+        //pageTransitionType: PageTransitionsType.scale,
+      ),
+      */
       routes: {
         '/signin-view': (context) => const LoginView(),
         '/ngo-view': (context) => const NgoView(),

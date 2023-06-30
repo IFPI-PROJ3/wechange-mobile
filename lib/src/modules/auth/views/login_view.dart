@@ -53,7 +53,7 @@ class _LoginViewState extends State<LoginView> {
 
                   const Image(
                     image: AssetImage(
-                        '/home/alunos/Downloads/wechange-mobile-1/lib/src/assets/logo.png'),
+                        '/home/alunos/Documentos/wechange-mobile-1/lib/src/assets/logo.png'),
                   ),
 
                   const SizedBox(height: 50),

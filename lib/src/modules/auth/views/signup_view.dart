@@ -23,57 +23,64 @@ class _SignUpView extends State<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        //crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(
-              left: 5, 
-              right: 5, 
-              top: 5, 
-              bottom: 0
-            ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
-                shape: const StadiumBorder(),
-                shadowColor: Colors.black,
-                side: const BorderSide( 
-                  width: 1.0,
-                  color: Colors.black,
-                ),
-              ),
-              onPressed: volunteerSignUp, 
-              child: const Text("Registrar-se como voluntário"),
-            ),
-          ),
-
-          Container(
-            margin: const EdgeInsets.only(
-              left: 5, 
-              right: 5, 
-              top: 5, 
-              bottom: 0
-            ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
-                shape: const StadiumBorder(),
-                shadowColor: Colors.black,
-                side: const BorderSide( 
-                  width: 1.0,
-                  color: Colors.black,
-                ),
-              ),
-              onPressed: ngoSignUp, 
-              child: const Text("Registrar-se como ONG")
-            ),
-          ),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
       ),
+      body: Center(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                left: 5, 
+                right: 5, 
+                top: 5, 
+                bottom: 0
+              ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
+                  shape: const StadiumBorder(),
+                  shadowColor: Colors.black,
+                  side: const BorderSide( 
+                    width: 1.0,
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: volunteerSignUp, 
+                child: const Text("Registrar-se como voluntário"),
+              ),
+            ),
+    
+            Container(
+              margin: const EdgeInsets.only(
+                left: 5, 
+                right: 5, 
+                top: 5, 
+                bottom: 0
+              ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
+                  shape: const StadiumBorder(),
+                  shadowColor: Colors.black,
+                  side: const BorderSide( 
+                    width: 1.0,
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: ngoSignUp, 
+                child: const Text("Registrar-se como ONG")
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
     );
   }
 }

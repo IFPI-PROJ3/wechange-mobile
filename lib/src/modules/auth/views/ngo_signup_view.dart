@@ -27,6 +27,7 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
   double _longitude = 0;
 
   MapPickerController mapPickerController = MapPickerController();
+
   CameraPosition cameraPosition = const CameraPosition(
     target: LatLng(41.311158, 69.279737),
     zoom: 14.4746,
@@ -55,6 +56,7 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
+
       if (permission == LocationPermission.deniedForever) {
         return null;
       }
@@ -67,12 +69,12 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
     developer.log("Latitude: $_latitude Longitude: $_longitude");
 
     return location;
+
   }
 
   ImagePicker imagePicker = ImagePicker();
   File? selectedImage;
 
-  // Houve uma atualização, alterem o PickedFile image = await _picker.getImage(...) para XFile image = await _picker.pickImage(...)
   selectImageFromGallery() async {
     final XFile? imageTemp = await imagePicker.pickImage(
       source: ImageSource.gallery
@@ -122,18 +124,6 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                       //child: Image.file(selectedImage!),
                     ),
                   ),
-                  
-                  //Image.file(selectedImage!),
-
-                  //CircleAvatar(backgroundImage: new FileImage(_image), radius: 200.0,),
-      
-
-                /*
-                IconButton(
-                  onPressed: selectImageFromGallery , 
-                  icon: const Icon(Icons.supervised_user_circle)
-                ),
-                */
 
                 const SizedBox(height: 20),
 
@@ -224,8 +214,11 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
 
                 Row(
                   children: [
-                    ElevatedButton(onPressed: _getLocation, child: const Icon(Icons.location_on)),
-                    const Text(""),
+                    ElevatedButton(
+                      onPressed: _getLocation, 
+                      child: const Icon(Icons.location_on)
+                    ),
+                    const Text(''),
                   ],
                 ),
 
