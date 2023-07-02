@@ -1,15 +1,12 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/auth/models/user_status.dart';
 import 'package:wechange_mobile/src/modules/auth/views/ngo_signup_view.dart';
 import 'package:wechange_mobile/src/modules/auth/views/signup_view.dart';
-// Splash Screen
 import 'package:wechange_mobile/src/modules/auth/views/volunteer_signup_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
 import 'package:wechange_mobile/src/modules/volunteer/views/volunteer_home_view.dart';
 import 'package:wechange_mobile/src/modules/volunteer/views/volunteer_view.dart';
 import 'package:wechange_mobile/src/styles/theme_we_change.dart';
-import 'matsallz/pages/login.dart';
 import 'src/modules/auth/services/auth_service.dart';
 import 'src/modules/auth/views/login_view.dart';
 
