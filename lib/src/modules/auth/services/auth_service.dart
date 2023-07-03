@@ -11,34 +11,35 @@ class AuthService {
   static UserStatus? user;
 
   // verifica e salva token de usuario
-  static Future<UserStatus?> getCurrentUser() async {
+  static Future<bool> getCurrentUser() async {
     RefreshToken? tokens = await TokenService.getTokens();
 
     if (tokens == null) {
-      return null;
+      return false;
     }
 
     developer.log("access_token: ${tokens.accessToken}");
     developer.log("refresh_token: ${tokens.refreshToken}");
 
-    final response = await Dio().put(
-      "${ApiParams.apiBaseUrl}/auth/refresh-token",
-      data: tokens.toJson(),
-      options: ApiParams.dioRequestDefaultOptions,
-    );
+    try {
+      final response = await Dio().put(
+        "${ApiParams.apiBaseUrl}/auth/refresh-token",
+        data: tokens.toJson(),
+        options: ApiParams.dioRequestDefaultOptions,
+      );
 
-    if (response.statusCode == 200) {
-      TokenService.saveTokens(RefreshToken.fromJson(response.data));
-      var userStatus = UserStatus.fromJson(response.data);
-      _authenticated(userStatus);
-      return userStatus;
-    } else if (response.statusCode == 401) {
+      if (response.statusCode == 200) {
+        TokenService.saveTokens(RefreshToken.fromJson(response.data));
+        var userStatus = UserStatus.fromJson(response.data);
+        _authenticated(userStatus);
+        return true;
+      }
+    } on Exception {
       TokenService.deleteTokens();
-      return null;
-    } else {
-      TokenService.deleteTokens();
-      return null;
+      return false;
     }
+
+    return false;
   }
 
   static Future<UserStatus?> signIn(String email, String password) async {

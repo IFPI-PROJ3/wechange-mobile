@@ -8,9 +8,9 @@ class ApiParams {
     responseType: ResponseType.json,
   );
 
-  static Options dioRequestDefaultOptionsAuthBearer(String refreshToken) {
+  static Options dioRequestDefaultOptionsAuthBearer(String accessToken) {
     Options options = dioRequestDefaultOptions;
-    options.headers = {'Authorization': 'Bearer $refreshToken'};
+    options.headers = {'Authorization': 'Bearer $accessToken'};
 
     return options;
   }

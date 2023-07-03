@@ -15,6 +15,14 @@ class _VolunteerSignUpView extends State<VolunteerSignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Center();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+          onPressed: () => Navigator.pushReplacementNamed(context, '/signup-view'),
+        ),
+      ),
+    );
   }
 }

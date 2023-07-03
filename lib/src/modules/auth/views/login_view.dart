@@ -21,8 +21,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void signIn() async {
-    UserStatus? userStatus = await AuthService.signIn(
-        _emailController.text, _passwordController.text);
+    UserStatus? userStatus = await AuthService.signIn(_emailController.text, _passwordController.text);
 
     if (userStatus == null) {
       return;
@@ -52,8 +51,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
 
                   const Image(
-                    image: AssetImage(
-                        '/home/alunos/Documentos/wechange-mobile-1/lib/src/assets/logo.png'),
+                    image: AssetImage('lib/src/assets/logo.png'),
                   ),
 
                   const SizedBox(height: 50),
@@ -100,8 +98,7 @@ class _LoginViewState extends State<LoginView> {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 75.0, vertical: 10.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 75.0, vertical: 10.0),
                       shape: const StadiumBorder(),
                       shadowColor: Colors.black,
                       side: const BorderSide(
