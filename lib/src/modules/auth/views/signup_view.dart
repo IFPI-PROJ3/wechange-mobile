@@ -67,7 +67,7 @@ class _SignUpView extends State<SignUpView> {
                       ),
                     ),
                     onPressed: ngoSignUp,
-                    child: const Text("Registrar-se como 2 ONG")),
+                    child: const Text("Registrar-se como ONG")),
               ),
             ],
           ),
