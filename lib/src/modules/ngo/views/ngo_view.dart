@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/ngo_events_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_home_view.dart';
-import 'package:wechange_mobile/src/modules/ngo/views/ngo_profile_view.dart';
 
 class NgoView extends StatefulWidget {
   const NgoView({super.key});
@@ -13,11 +13,7 @@ class _NgoViewState extends State<NgoView> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     NgoHomeView(),
-    Text(
-      'Index 1: Eventos',
-      //style: optionStyle,
-    ),
-    NgoProfileView()
+    NgoEventsView(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,10 +42,6 @@ class _NgoViewState extends State<NgoView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Eventos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
           ),
         ],
         currentIndex: _selectedIndex,
