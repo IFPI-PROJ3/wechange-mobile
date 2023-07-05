@@ -98,13 +98,9 @@ class _LoginViewState extends State<LoginView> {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 75.0, vertical: 10.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 75.0, vertical: 15.0),
                       shape: const StadiumBorder(),
-                      shadowColor: Colors.black,
-                      side: const BorderSide(
-                        width: 1.0,
-                        color: Colors.black,
-                      ),
+                      shadowColor: Colors.grey,
                     ),
                     onPressed: signIn,
                     child: buildTextButton('Entrar'),
