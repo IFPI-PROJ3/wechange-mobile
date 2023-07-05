@@ -152,12 +152,10 @@ class _OngRegistrationState extends State<OngRegistration> {
                           if (!selectedCategory!.contains(category)) {
                             setState(() {
                               selectedCategory!.add(category);
-                              print(selectedCategory);
                             });
                           } else {
                             setState(() {
                               selectedCategory!.removeWhere((element) => element == category);
-                              print(selectedCategory);
                             });
                           }
                         },
