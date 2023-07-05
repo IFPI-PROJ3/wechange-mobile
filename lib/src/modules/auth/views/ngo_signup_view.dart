@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:wechange_mobile/matsallz/methods/methods.dart';
 import 'package:wechange_mobile/src/modules/auth/models/signup_ngo.dart';
 import 'package:wechange_mobile/src/modules/auth/services/auth_service.dart';
 import 'dart:developer' as developer;
@@ -29,7 +28,7 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
   double _latitude = 0;
   double _longitude = 0;
   // ignore: unused_field
-  List<int> _categoriesIds = []; // PARA CADASTRO
+  final List<int> _categoriesIds = []; // PARA CADASTRO
 
   ImagePicker imagePicker = ImagePicker();
   String _addressDescription = "";
@@ -39,15 +38,24 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
 
   Future<void> _signUp() async {
     if (_formKey.currentState!.validate()) {
-      SignUpNgo signUpNgo = SignUpNgo(_usernameController.text, _emailController.text, _passwordController.text,
-          _nameController.text, _descriptionController.text, _latitude, _longitude, _categoriesIds);
+      SignUpNgo signUpNgo = SignUpNgo(
+          _usernameController.text,
+          _emailController.text,
+          _passwordController.text,
+          _nameController.text,
+          _descriptionController.text,
+          _latitude,
+          _longitude,
+          _categoriesIds);
 
       await AuthService.signUpNgo(signUpNgo);
     }
   }
 
   Widget locationWidget() {
-    return locationIsLoading ? const Center(child: CircularProgressIndicator()) : const Icon(Icons.location_on);
+    return locationIsLoading
+        ? const Center(child: CircularProgressIndicator())
+        : Icon(Icons.location_on, color: Theme.of(context).primaryColor);
   }
 
   Future<Position?> _getLocation() async {
@@ -74,7 +82,8 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
     _latitude = location.latitude;
     _longitude = location.longitude;
 
-    _addressDescription = await GeoCoderUtils.getAddressByLatLng(_latitude, _longitude);
+    _addressDescription =
+        await GeoCoderUtils.getAddressByLatLng(_latitude, _longitude);
 
     setState(() {
       locationIsLoading = false;
@@ -87,7 +96,8 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
   }
 
   selectImageFromGallery() async {
-    final XFile? imageTemp = await imagePicker.pickImage(source: ImageSource.gallery);
+    final XFile? imageTemp =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (imageTemp != null) {
       setState(() {
@@ -107,8 +117,12 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
-          onPressed: () => Navigator.pushReplacementNamed(context, '/signup-view'),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Theme.of(context).primaryColor,
+          ),
+          onPressed: () =>
+              Navigator.pushReplacementNamed(context, '/signup-view'),
         ),
       ),
       body: Padding(
@@ -122,9 +136,13 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                 _selectedImage == null
                     ? IconButton(
                         onPressed: selectImageFromGallery,
-                        icon: const Icon(Icons.camera_alt),
+                        icon: Icon(
+                          Icons.camera_alt,
+                          color: Theme.of(context).primaryColor,
+                        ),
                         style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(Colors.transparent)),
+                            backgroundColor: MaterialStatePropertyAll<Color>(
+                                Colors.transparent)),
                       )
                     : Padding(
                         padding: const EdgeInsets.all(10),
@@ -226,9 +244,13 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                         children: <Widget>[
                           locationWidget(),
                           const SizedBox(height: 2),
-                          const Text(
+                          Text(
                             'Localização',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
                           ),
                         ],
                       ),
@@ -239,13 +261,59 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
                 FutureBuilder<List<Category>>(
                   future: CategoryService.getCategories(),
-                  builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Category>> snapshot) {
                     if (snapshot.hasData) {
                       _categories = snapshot.data!;
-                      return const Text('');
+                      return Wrap(
+                        children: _categories.map(
+                          (category) {
+                            bool isSelected = false;
+                            if (_categoriesIds.contains(category.id)) {
+                              isSelected = true;
+                            }
+                            return GestureDetector(
+                              onTap: () {
+                                if (!_categoriesIds.contains(category.id)) {
+                                  setState(() {
+                                    _categoriesIds.add(category.id!);
+                                  });
+                                } else {
+                                  setState(() {
+                                    _categoriesIds.removeWhere(
+                                        (element) => element == category.id);
+                                  });
+                                }
+                              },
+                              child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 4),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 12),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(18),
+                                        border: Border.all(
+                                            color: isSelected
+                                                ? const Color(0xFF116B67)
+                                                : Colors.grey,
+                                            width: 2)),
+                                    child: Text(
+                                      category.name!,
+                                      style: TextStyle(
+                                          color: isSelected
+                                              ? const Color(0xFF116B67)
+                                              : Colors.grey,
+                                          fontSize: 14),
+                                    ),
+                                  )),
+                            );
+                          },
+                        ).toList(),
+                      );
                       //
                     } else {
                       return const Column(
@@ -254,7 +322,9 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
                     }
                   },
                 ),
-                ElevatedButton(onPressed: _signUp, child: const Text('Cadastrar'))
+                const SizedBox(height: 20),
+                ElevatedButton(
+                    onPressed: _signUp, child: const Text('Cadastrar'))
               ],
             ),
           ),
