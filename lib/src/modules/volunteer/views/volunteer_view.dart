@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class VolunteerView extends StatefulWidget {
   const VolunteerView({super.key});
 
+  static String route = '/ngo-initial-view';
+
   @override
   State<VolunteerView> createState() => _VolunteerViewState();
 }

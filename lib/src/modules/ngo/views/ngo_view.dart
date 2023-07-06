@@ -5,6 +5,8 @@ import 'package:wechange_mobile/src/modules/ngo/views/ngo_home_view.dart';
 class NgoView extends StatefulWidget {
   const NgoView({super.key});
 
+  static String route = 'ngo-initial-view';
+
   @override
   State<NgoView> createState() => _NgoViewState();
 }
@@ -45,7 +47,7 @@ class _NgoViewState extends State<NgoView> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.teal,
+        selectedItemColor: Theme.of(context).primaryColor,
         onTap: _onItemTapped,
       ),
     );

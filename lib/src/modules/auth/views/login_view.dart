@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/auth/models/user_status.dart';
 import 'package:wechange_mobile/src/modules/auth/services/auth_service.dart';
+import 'package:wechange_mobile/src/modules/auth/views/signup_view.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
 import 'package:wechange_mobile/src/styles/styles.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  static String route = "/signin";
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -28,7 +32,7 @@ class _LoginViewState extends State<LoginView> {
     }
 
     if (userStatus.role == 'Ngo') {
-      Navigator.pushReplacementNamed(context, '/ngo-view');
+      Navigator.pushReplacementNamed(context, NgoView.route);
     } else if (userStatus.role == 'Volunteer') {
       Navigator.pushReplacementNamed(context, '/volunteer-view');
     }
@@ -119,13 +123,13 @@ class _LoginViewState extends State<LoginView> {
                       const Text('Não possui cadastro? '),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, '/signup-view');
+                          Navigator.pushReplacementNamed(context, SignUpView.route);
                         },
-                        child: const Text(
+                        child: Text(
                           'Cadastre-se',
                           style: TextStyle(
                             fontSize: 15,
-                            color: Color(0xFF116B67),
+                            color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
