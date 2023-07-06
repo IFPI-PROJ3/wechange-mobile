@@ -21,7 +21,8 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void signIn() async {
-    UserStatus? userStatus = await AuthService.signIn(_emailController.text, _passwordController.text);
+    UserStatus? userStatus = await AuthService.signIn(
+        _emailController.text, _passwordController.text);
 
     if (userStatus == null) {
       return;
@@ -64,6 +65,12 @@ class _LoginViewState extends State<LoginView> {
                       labelText: 'E-mail',
                       hintText: 'Digite seu email',
                     ),
+                    validator: (email) {
+                      if (email!.isEmpty) {
+                        return 'Por favor, digite seu e-mail!';
+                      }
+                      return null;
+                    },
                   ),
 
                   const SizedBox(height: 10),
@@ -77,6 +84,12 @@ class _LoginViewState extends State<LoginView> {
                       hintText: 'Digite sua senha',
                     ),
                     obscureText: true,
+                    validator: (senha) {
+                      if (senha!.isEmpty) {
+                        return 'Por favor, digite sua senha!';
+                      }
+                      return null;
+                    },
                   ),
 
                   const SizedBox(height: 5),
@@ -98,7 +111,8 @@ class _LoginViewState extends State<LoginView> {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 75.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 75.0, vertical: 15.0),
                       shape: const StadiumBorder(),
                       shadowColor: Colors.grey,
                     ),
@@ -119,7 +133,8 @@ class _LoginViewState extends State<LoginView> {
                       const Text('Não possui cadastro? '),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, '/signup-view');
+                          Navigator.pushReplacementNamed(
+                              context, '/signup-view');
                         },
                         child: const Text(
                           'Cadastre-se',
