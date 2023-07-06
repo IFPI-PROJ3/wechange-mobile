@@ -10,16 +10,18 @@ class NgoService {
   static Future<bool> getNgoInfo() async {
     RefreshToken? tokens = await TokenService.getTokens();
 
-    final response = await Dio().get(
-      "${ApiParams.apiBaseUrl}/ngo/initial-page",
-      options: ApiParams.dioRequestDefaultOptionsAuthBearer(tokens!.accessToken),
-    );
+    try {
+      final response = await Dio().get(
+        "${ApiParams.apiBaseUrl}/ngo/initial-page",
+        options: ApiParams.dioRequestDefaultOptionsAuthBearer(tokens!.accessToken),
+      );
 
-    if (response.statusCode == 200) {
-      ngo = NgoInfo.fromJson(response.data);
-      return true;
-    } else {
-      return false;
-    }
+      if (response.statusCode == 200) {
+        ngo = NgoInfo.fromJson(response.data);
+        return true;
+      }
+    } on Exception {}
+
+    return false;
   }
 }

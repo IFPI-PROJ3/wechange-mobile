@@ -4,6 +4,9 @@ import 'package:wechange_mobile/src/modules/auth/views/login_view.dart';
 import 'package:wechange_mobile/src/modules/auth/views/ngo_signup_view.dart';
 import 'package:wechange_mobile/src/modules/auth/views/signup_view.dart';
 import 'package:wechange_mobile/src/modules/auth/views/volunteer_signup_view.dart';
+import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/event_edit_view.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/new_event_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_events_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
 import 'package:wechange_mobile/src/modules/volunteer/views/volunteer_home_view.dart';
@@ -43,21 +46,26 @@ class MyApp extends StatelessWidget {
               return const LoginView();
             }
           } else {
-            return const LoginView();
+            //return const LoginView();
+            return const LinearProgressIndicator();
           }
         },
       ),
       routes: {
         //Auth
-        '/signin-view': (context) => const LoginView(),
-        '/signup-view': (context) => const SignUpView(),
-        '/signup-ngo': (context) => const NgoSignUpView(),
-        '/signup-volunteer': (context) => const VolunteerSignUpView(),
+        LoginView.route: (context) => const LoginView(),
+        SignUpView.route: (context) => const SignUpView(),
+        NgoSignUpView.route: (context) => const NgoSignUpView(),
+        VolunteerSignUpView.route: (context) => const VolunteerSignUpView(),
 
         //Ngo-Side
-        '/ngo-view': (context) => const NgoView(),
-        '/volunteer-view': (context) => const VolunteerView(),
-        '/events-view': (context) => const NgoEventsView()
+        NgoView.route: (context) => const NgoView(),
+        NgoEventsView.route: (context) => const NgoEventsView(),
+        NewEventView.route: (context) => const NewEventView(),
+        EventEditView.route: (context) => EventEditView(ModalRoute.of(context)!.settings.arguments as EventInfo),
+
+        //Volunteer-Side
+        VolunteerView.route: (context) => const VolunteerView(),
       },
     );
   }

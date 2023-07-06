@@ -3,6 +3,7 @@ import 'package:wechange_mobile/src/modules/common/api_params.dart';
 import 'package:wechange_mobile/src/modules/common/utils/geocoder_utils.dart';
 import 'package:wechange_mobile/src/modules/ngo/models/ngo_info.dart';
 import 'package:wechange_mobile/src/modules/ngo/services/ngo_service.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/new_event_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/widgets/appbar_widget.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/widgets/info_widget.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/widgets/profile_widget.dart';
@@ -84,7 +85,7 @@ class _NgoHomeViewState extends State<NgoHomeView> {
         Container(
           margin: const EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
           child: ElevatedButton(
-            onPressed: () => {},
+            onPressed: () => Navigator.pushReplacementNamed(context, NewEventView.route),
             child: const Row(
               children: [
                 Icon(

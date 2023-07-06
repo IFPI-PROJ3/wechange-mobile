@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wechange_mobile/src/modules/auth/views/login_view.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
 
 import '../../../auth/services/auth_service.dart';
 
@@ -27,10 +29,10 @@ AppBar buildAppBar(BuildContext context) {
         return;
       }
       if (exit) {
-        Navigator.pushReplacementNamed(context, '/signin-view');
+        Navigator.pushReplacementNamed(context, LoginView.route);
         await AuthService.logOut();
       } else {
-        Navigator.pushReplacementNamed(context, '/ngo-view');
+        Navigator.pushReplacementNamed(context, NgoView.route);
         //Navigator.pop(context);
       }
     });

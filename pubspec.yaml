@@ -26,6 +26,7 @@ dependencies:
   animated_splash_screen: ^1.0.0
   flutter_tags: ^1.0.0-nullsafety.1
   geocoding: ^2.1.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wechange_mobile/src/modules/auth/views/login_view.dart';
+import 'package:wechange_mobile/src/modules/auth/views/ngo_signup_view.dart';
+import 'package:wechange_mobile/src/modules/auth/views/volunteer_signup_view.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
+
+  static String route = "/signup-options";
 
   @override
   State<SignUpView> createState() => _SignUpView();
@@ -14,11 +19,11 @@ class _SignUpView extends State<SignUpView> {
   }
 
   void volunteerSignUp() {
-    Navigator.pushReplacementNamed(context, '/signup-volunteer');
+    Navigator.pushReplacementNamed(context, VolunteerSignUpView.route);
   }
 
   void ngoSignUp() {
-    Navigator.pushReplacementNamed(context, '/signup-ngo');
+    Navigator.pushReplacementNamed(context, NgoSignUpView.route);
   }
 
   @override
@@ -28,8 +33,7 @@ class _SignUpView extends State<SignUpView> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
-          onPressed: () =>
-              Navigator.pushReplacementNamed(context, '/signin-view'),
+          onPressed: () => Navigator.pushReplacementNamed(context, LoginView.route),
         ),
       ),
       body: Padding(
