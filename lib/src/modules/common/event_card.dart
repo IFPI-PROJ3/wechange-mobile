@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/event_edit_view.dart';
 
-class EventCard extends StatelessWidget {
+class EventCard extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   const EventCard(this._event);
   final EventInfo _event;
 
+  @override
+  State<EventCard> createState() => _EventCardState();
+}
+
+class _EventCardState extends State<EventCard> {
   void _toEdit(BuildContext context) {
     //Navigator.pushReplacementNamed(context, EventEditView.route, arguments: event);
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EventEditView(_event),
+        builder: (context) => EventEditView(widget._event),
       ),
-    );
+    ).then((_) => setState(() {}));
   }
-
-  void _toEventRequests() {}
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class EventCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _event.title!,
+                                widget._event.title!,
                                 overflow: TextOverflow.fade,
                                 maxLines: 1,
                                 softWrap: false,
@@ -63,7 +66,7 @@ class EventCard extends StatelessWidget {
                                   _toEdit(context);
                                   break;
                                 case 1:
-                                  _toEventRequests();
+                                  //_toEventRequests();
                                   break;
                               }
                             },
@@ -92,7 +95,7 @@ class EventCard extends StatelessWidget {
                       children: [
                         AspectRatio(
                           aspectRatio: 1.2,
-                          child: Image.network(_event.imageThumb!),
+                          child: Image.network(widget._event.imageThumb!),
                         ),
                         Expanded(
                           child: Column(
@@ -128,7 +131,7 @@ class EventCard extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  '${_event.volunteersLimit}',
+                                                  '${widget._event.volunteersLimit}',
                                                   overflow: TextOverflow.fade,
                                                   maxLines: 1,
                                                   softWrap: false,
@@ -145,7 +148,7 @@ class EventCard extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  '${_event.volunteersCount}',
+                                                  '${widget._event.volunteersCount}',
                                                   overflow: TextOverflow.fade,
                                                   maxLines: 1,
                                                   softWrap: false,
@@ -164,7 +167,7 @@ class EventCard extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '${_event.startDate} - ${_event.endDate}',
+                                              '${widget._event.startDate} - ${widget._event.endDate}',
                                               overflow: TextOverflow.fade,
                                               maxLines: 1,
                                               softWrap: false,

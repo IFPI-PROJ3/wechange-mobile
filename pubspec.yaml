@@ -27,6 +27,7 @@ dependencies:
   flutter_tags: ^1.0.0-nullsafety.1
   geocoding: ^2.1.0
   intl: ^0.18.1
+  number_selection: ^1.0.0
 
 dev_dependencies:
   flutter_test:

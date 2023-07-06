@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
-import 'package:wechange_mobile/src/modules/ngo/views/ngo_events_view.dart';
-import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
+import 'package:wechange_mobile/src/modules/ngo/services/ngo_service.dart';
 
 class EventEditView extends StatefulWidget {
   const EventEditView(this._event, {super.key});
@@ -15,6 +14,7 @@ class EventEditView extends StatefulWidget {
 }
 
 class _EventEditView extends State<EventEditView> {
+  //var mngo = NgoService.ngo!.upcomingEvents[0].title = "IAIAIAIA";
   @override
   void initState() {
     super.initState();
