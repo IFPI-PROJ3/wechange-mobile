@@ -29,10 +29,10 @@ class _NgoHomeViewState extends State<NgoHomeView> {
   }
 
   void _showSnackBar() {
-    const snackBar = SnackBar(
-      content: Text('Não foi possível carregar a página inicial.'),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    //const snackBar = SnackBar(
+    //content: Text('Não foi possível carregar a página inicial.'),
+    //);
+    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override

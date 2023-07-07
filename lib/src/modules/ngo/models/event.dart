@@ -1,4 +1,5 @@
 class Event {
+  String? id;
   String? title;
   String? description;
   int? volunteersLimit;
@@ -6,9 +7,18 @@ class Event {
   String? endDate;
   String? imageThumb;
 
-  Event({this.title, this.description, this.volunteersLimit, this.startDate, this.endDate, this.imageThumb});
+  Event({
+    this.id,
+    this.title,
+    this.description,
+    this.volunteersLimit,
+    this.startDate,
+    this.endDate,
+    this.imageThumb,
+  });
 
   Event.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
     title = json['title'];
     description = json['description'];
     volunteersLimit = json['volunteers_limit'];
@@ -19,6 +29,7 @@ class Event {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['title'] = title;
     data['description'] = description;
     data['volunteers_limit'] = volunteersLimit;

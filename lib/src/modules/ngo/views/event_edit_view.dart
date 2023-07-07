@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
+import 'package:wechange_mobile/src/modules/common/utils/image_utils.dart';
 import 'package:wechange_mobile/src/modules/common/widgets/select_photo_options.dart';
+import 'package:wechange_mobile/src/modules/ngo/services/event_service.dart';
 
 class EventEditView extends StatefulWidget {
   const EventEditView(this._event, {super.key});
@@ -24,6 +26,19 @@ class _EventEditView extends State<EventEditView> {
   final _description = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void editEvent() {
+    widget._event.title = _title.text;
+    widget._event.description = _description.text;
+    if (_image != null) {
+      widget._event.imageBase64ToUpload = ImageUtils.ConvertToBase64(_image!);
+    } else {
+      widget._event.imageBase64ToUpload = null;
+    }
+
+    EventService.editEvent(widget._event);
+    Navigator.of(context).pop();
+  }
 
   void initializeFields() {
     _title.text = widget._event.title!;
@@ -174,7 +189,7 @@ class _EventEditView extends State<EventEditView> {
                 Container(
                   margin: const EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 10),
                   child: ElevatedButton(
-                    onPressed: () => {},
+                    onPressed: editEvent,
                     child: const Text('Confirmar'),
                   ),
                 ),
