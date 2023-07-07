@@ -28,6 +28,13 @@ class _NgoHomeViewState extends State<NgoHomeView> {
     setState(() {});
   }
 
+  void _showSnackBar() {
+    const snackBar = SnackBar(
+      content: Text('Não foi possível carregar a página inicial.'),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +47,7 @@ class _NgoHomeViewState extends State<NgoHomeView> {
               loadAddressDescription();
               return listViewNgo(context);
             } else {
-              const snackBar = SnackBar(
-                content: Text('Não foi possível carregar a página inicial.'),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              _showSnackBar();
               return const Center(
                 child: CircularProgressIndicator(),
               );
