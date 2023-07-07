@@ -1,3 +1,4 @@
+import 'package:wechange_mobile/src/modules/common/api_params.dart';
 import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
 
 class NgoInfo {
@@ -13,6 +14,8 @@ class NgoInfo {
   late List<EventInfo> upcomingEvents;
   late List<EventInfo> currentEvents;
   late List<EventInfo> endedEvents;
+
+  late String profile_image;
 
   NgoInfo.fromJson(Map<String, dynamic> json) {
     id = json['ngo']['id'];
@@ -45,5 +48,7 @@ class NgoInfo {
         currentEvents.add(EventInfo.fromJson(v));
       });
     }
+
+    profile_image = '${ApiParams.s3BucketBaseUrl}/${json['ngo']['userId']}.jpg';
   }
 }

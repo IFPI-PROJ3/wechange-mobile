@@ -41,17 +41,19 @@ class _NgoEventsViewState extends State<NgoEventsView> {
                 children: <Widget>[
                   ListView(
                     children: [
-                      ...ngoInfo.currentEvents.map((event) => EventCard(event)).toList(),
+                      ...ngoInfo.currentEvents.map((event) => EventCard(event, EventCardOptions.current)).toList(),
                     ],
                   ),
                   ListView(
                     children: [
-                      ...ngoInfo.upcomingEvents.map((event) => EventCard(event)).toList(),
+                      ...ngoInfo.upcomingEvents
+                          .map((event) => EventCard(event, EventCardOptions.upcoming))
+                          .toList(),
                     ],
                   ),
                   ListView(
                     children: [
-                      ...ngoInfo.endedEvents.map((event) => EventCard(event)).toList(),
+                      ...ngoInfo.endedEvents.map((event) => EventCard(event, EventCardOptions.ended)).toList(),
                     ],
                   ),
                 ],

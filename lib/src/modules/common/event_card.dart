@@ -4,14 +4,18 @@ import 'package:wechange_mobile/src/modules/ngo/views/event_edit_view.dart';
 
 class EventCard extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
-  const EventCard(this._event);
+  const EventCard(this._event, this._option);
+
   final EventInfo _event;
+  final EventCardOptions _option;
 
   @override
   State<EventCard> createState() => _EventCardState();
 }
 
 class _EventCardState extends State<EventCard> {
+  void _toParticipants(BuildContext context) {}
+
   void _toEdit(BuildContext context) {
     //Navigator.pushReplacementNamed(context, EventEditView.route, arguments: event);
     Navigator.push(
@@ -20,6 +24,63 @@ class _EventCardState extends State<EventCard> {
         builder: (context) => EventEditView(widget._event),
       ),
     ).then((_) => setState(() {}));
+  }
+
+  void _toEventRequests(BuildContext context) {}
+
+  Widget eventCardOptions() {
+    switch (widget._option) {
+      case EventCardOptions.current:
+        return PopupMenuButton(
+          onSelected: (value) {
+            switch (value) {
+              case 0:
+                _toParticipants(context);
+                break;
+            }
+          },
+          child: Icon(
+            Icons.more_vert,
+            color: Theme.of(context).primaryColor,
+          ),
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 0,
+              child: Text("Participantes"),
+            ),
+          ],
+        );
+
+      case EventCardOptions.upcoming:
+        return PopupMenuButton(
+          onSelected: (value) {
+            switch (value) {
+              case 0:
+                _toEdit(context);
+                break;
+              case 1:
+                _toEventRequests(context);
+                break;
+            }
+          },
+          child: Icon(
+            Icons.more_vert,
+            color: Theme.of(context).primaryColor,
+          ),
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 0,
+              child: Text("Editar"),
+            ),
+            const PopupMenuItem(
+              value: 1,
+              child: Text("Solicitações"),
+            ),
+          ],
+        );
+      case EventCardOptions.ended:
+        return const Center();
+    }
   }
 
   @override
@@ -57,35 +118,7 @@ class _EventCardState extends State<EventCard> {
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 5),
-                          child: PopupMenuButton(
-                            onSelected: (value) {
-                              switch (value) {
-                                case 0:
-                                  _toEdit(context);
-                                  break;
-                                case 1:
-                                  //_toEventRequests();
-                                  break;
-                              }
-                            },
-                            child: Icon(
-                              Icons.more_vert,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            itemBuilder: (context) => [
-                              const PopupMenuItem(
-                                value: 0,
-                                child: Text("Editar"),
-                              ),
-                              const PopupMenuItem(
-                                value: 1,
-                                child: Text("Solicitações"),
-                              ),
-                            ],
-                          ),
-                        ),
+                        Container(margin: const EdgeInsets.only(right: 5), child: eventCardOptions()),
                       ],
                     )),
                   ),
@@ -198,3 +231,5 @@ class _EventCardState extends State<EventCard> {
     );
   }
 }
+
+enum EventCardOptions { current, upcoming, ended }

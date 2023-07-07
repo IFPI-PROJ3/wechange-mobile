@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wechange_mobile/src/modules/common/api_params.dart';
 import 'package:wechange_mobile/src/modules/common/utils/geocoder_utils.dart';
 import 'package:wechange_mobile/src/modules/ngo/models/ngo_info.dart';
 import 'package:wechange_mobile/src/modules/ngo/services/ngo_service.dart';
@@ -66,7 +65,7 @@ class _NgoHomeViewState extends State<NgoHomeView> {
       physics: const BouncingScrollPhysics(),
       children: [
         const SizedBox(height: 10),
-        ProfileWidget(imagePath: "${ApiParams.s3BucketBaseUrl}/d1c68195-f9d3-43ba-93c8-35f937286ab7", size: 128),
+        ProfileWidget(imagePath: ngo.profile_image, size: 128),
         buildDescription(context, NgoService.ngo!.name, NgoService.ngo!.description),
         const SizedBox(height: 10),
         Row(
@@ -85,7 +84,10 @@ class _NgoHomeViewState extends State<NgoHomeView> {
         Container(
           margin: const EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
           child: ElevatedButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, NewEventView.route),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NewEventView()),
+            ),
             child: const Row(
               children: [
                 Icon(

@@ -28,6 +28,7 @@ dependencies:
   geocoding: ^2.1.0
   intl: ^0.18.1
   number_selection: ^1.0.0
+  image_cropper: ^4.0.1
 
 dev_dependencies:
   flutter_test:
