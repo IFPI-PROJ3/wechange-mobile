@@ -44,7 +44,7 @@ class _NgoSignUpViewState extends State<NgoSignUpView> {
       SignUpNgo signUpNgo = SignUpNgo(_usernameController.text, _emailController.text, _passwordController.text,
           _nameController.text, _descriptionController.text, _latitude, _longitude, _categoriesIds);
 
-      await AuthService.signUpNgo(signUpNgo);
+      await AuthService.signUpNgo(context, signUpNgo);
     }
   }
 

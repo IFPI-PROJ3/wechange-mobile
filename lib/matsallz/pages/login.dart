@@ -42,8 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                     validator: (email) {
                       if (email!.isEmpty) {
                         return 'Por favor, digite seu email!';
-                      } else if (!RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      } else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(_emailController.text)) {
                         return 'Por favor, digite um e-mail correto!';
                       }
@@ -144,8 +143,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     if (response.statusCode == 200) {
-      await sharedPreferences.setString(
-          'token', "Token $jsonDecode(response.body)['access_token']");
+      await sharedPreferences.setString('token', "Token $jsonDecode(response.body)['access_token']");
       //print(jsonDecode(response.body)['access_token']);
       return true;
     } else {

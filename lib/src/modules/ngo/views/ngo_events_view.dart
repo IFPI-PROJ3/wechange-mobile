@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/common/event_card.dart';
-import 'package:wechange_mobile/src/modules/ngo/models/ngo_info.dart';
 import 'package:wechange_mobile/src/modules/ngo/services/ngo_service.dart';
 
 class NgoEventsView extends StatefulWidget {
@@ -15,6 +14,10 @@ class _NgoEventsViewState extends State<NgoEventsView> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void callback() {
+    setState(() {});
   }
 
   @override
@@ -36,24 +39,27 @@ class _NgoEventsViewState extends State<NgoEventsView> {
           future: NgoService.getNgoInfo(),
           builder: (BuildContext context, snapshot) {
             if (snapshot.hasData) {
-              NgoInfo ngoInfo = NgoService.ngo!;
               return TabBarView(
                 children: <Widget>[
                   ListView(
                     children: [
-                      ...ngoInfo.currentEvents.map((event) => EventCard(event, EventCardOptions.current)).toList(),
-                    ],
-                  ),
-                  ListView(
-                    children: [
-                      ...ngoInfo.upcomingEvents
-                          .map((event) => EventCard(event, EventCardOptions.upcoming))
+                      ...NgoService.ngo!.currentEvents
+                          .map((event) => EventCard(callback, event, EventCardOptions.current))
                           .toList(),
                     ],
                   ),
                   ListView(
                     children: [
-                      ...ngoInfo.endedEvents.map((event) => EventCard(event, EventCardOptions.ended)).toList(),
+                      ...NgoService.ngo!.upcomingEvents
+                          .map((event) => EventCard(callback, event, EventCardOptions.upcoming))
+                          .toList(),
+                    ],
+                  ),
+                  ListView(
+                    children: [
+                      ...NgoService.ngo!.endedEvents
+                          .map((event) => EventCard(callback, event, EventCardOptions.ended))
+                          .toList(),
                     ],
                   ),
                 ],

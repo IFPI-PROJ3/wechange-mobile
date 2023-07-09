@@ -26,7 +26,10 @@ class _LoginViewState extends State<LoginView> {
 
   void signIn() async {
     UserStatus? userStatus = await AuthService.signIn(
-        _emailController.text, _passwordController.text);
+      context,
+      _emailController.text,
+      _passwordController.text,
+    );
 
     if (userStatus == null) {
       return;
@@ -115,8 +118,7 @@ class _LoginViewState extends State<LoginView> {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 75.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 75.0, vertical: 15.0),
                       shape: const StadiumBorder(),
                       shadowColor: Colors.grey,
                     ),

@@ -27,7 +27,7 @@ class _EventEditView extends State<EventEditView> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void editEvent() {
+  Future<void> editEvent() async {
     widget._event.title = _title.text;
     widget._event.description = _description.text;
     if (_image != null) {
@@ -36,8 +36,40 @@ class _EventEditView extends State<EventEditView> {
       widget._event.imageBase64ToUpload = null;
     }
 
-    EventService.editEvent(widget._event);
+    await EventService.editEvent(widget._event);
     Navigator.of(context).pop();
+  }
+
+  Future<void> cancelEvent() async {
+    showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Confirmação de cancelamento'),
+        content: const Text(
+          'Deseja realmente cancelar este evento',
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Confirmar'),
+          ),
+        ],
+      ),
+    ).then((cancel) async {
+      if (cancel == null) {
+        return;
+      }
+      if (cancel) {
+        await EventService.cancelEvent(widget._event);
+        Navigator.of(context).pop();
+      } else {
+        return;
+      }
+    });
   }
 
   void initializeFields() {
@@ -184,6 +216,21 @@ class _EventEditView extends State<EventEditView> {
                       }
                       return null;
                     },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 40, right: 40, top: 20, bottom: 10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      side: const BorderSide(
+                          width: 2, // the thickness
+                          color: Colors.red // the color of the border
+                          ),
+                      foregroundColor: Colors.red,
+                      backgroundColor: Colors.white,
+                    ),
+                    onPressed: cancelEvent,
+                    child: const Text('Cancelar'),
                   ),
                 ),
                 Container(

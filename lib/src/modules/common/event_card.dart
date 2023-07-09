@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/event_edit_view.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/event_requests_view.dart';
 
 class EventCard extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const EventCard(this._event, this._option);
+  const EventCard(this.callback, this._event, this._option, {super.key});
 
+  final Function callback;
   final EventInfo _event;
   final EventCardOptions _option;
 
@@ -17,16 +18,31 @@ class _EventCardState extends State<EventCard> {
   void _toParticipants(BuildContext context) {}
 
   void _toEdit(BuildContext context) {
-    //Navigator.pushReplacementNamed(context, EventEditView.route, arguments: event);
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => EventEditView(widget._event),
       ),
-    ).then((_) => setState(() {}));
+    ).then((_) => reloadParentView());
   }
 
-  void _toEventRequests(BuildContext context) {}
+  void _toEventRequests(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const EventRequests(),
+      ),
+    ).then((_) => reloadParentView());
+  }
+
+  void _toEventParticipants(BuildContext context) {
+    //
+  }
+
+  void reloadParentView() {
+    widget.callback();
+    setState(() {});
+  }
 
   Widget eventCardOptions() {
     switch (widget._option) {
@@ -75,6 +91,10 @@ class _EventCardState extends State<EventCard> {
             const PopupMenuItem(
               value: 1,
               child: Text("Solicitações"),
+            ),
+            const PopupMenuItem(
+              value: 2,
+              child: Text("Participantes"),
             ),
           ],
         );

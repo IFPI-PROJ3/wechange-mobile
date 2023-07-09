@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-Widget infoWidget(BuildContext context, double rating, int active_events, int events) => Row(
+Widget infoWidget(BuildContext context, double rating, int activeEvents, int events) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         buildButton(context, rating == -1 ? "--" : rating.toString(), 'Avaliação'),
         buildDivider(),
-        buildButton(context, active_events.toString(), 'Eventos Ativos'),
+        buildButton(context, activeEvents.toString(), 'Eventos Ativos'),
         buildDivider(),
         buildButton(context, events.toString(), 'Eventos'),
       ],
