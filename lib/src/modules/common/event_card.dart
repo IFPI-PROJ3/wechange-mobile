@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/event_edit_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/event_requests_view.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/event_volunteers_view.dart';
 
 class EventCard extends StatefulWidget {
   const EventCard(this.callback, this._event, this._option, {super.key});
@@ -15,8 +16,6 @@ class EventCard extends StatefulWidget {
 }
 
 class _EventCardState extends State<EventCard> {
-  void _toParticipants(BuildContext context) {}
-
   void _toEdit(BuildContext context) {
     Navigator.push(
       context,
@@ -30,13 +29,18 @@ class _EventCardState extends State<EventCard> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const EventRequests(),
+        builder: (context) => EventRequestsView(widget._event),
       ),
     ).then((_) => reloadParentView());
   }
 
-  void _toEventParticipants(BuildContext context) {
-    //
+  void _toEventVolunteers(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EventVolunteersView(widget._event),
+      ),
+    );
   }
 
   void reloadParentView() {
@@ -51,7 +55,7 @@ class _EventCardState extends State<EventCard> {
           onSelected: (value) {
             switch (value) {
               case 0:
-                _toParticipants(context);
+                _toEventVolunteers(context);
                 break;
             }
           },
@@ -77,6 +81,9 @@ class _EventCardState extends State<EventCard> {
               case 1:
                 _toEventRequests(context);
                 break;
+              case 2:
+                _toEventVolunteers(context);
+                break;
             }
           },
           child: Icon(
@@ -99,6 +106,8 @@ class _EventCardState extends State<EventCard> {
           ],
         );
       case EventCardOptions.ended:
+        return const Center();
+      case EventCardOptions.exibition:
         return const Center();
     }
   }
@@ -177,31 +186,14 @@ class _EventCardState extends State<EventCard> {
                                             Row(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.all(5),
+                                                  padding: const EdgeInsets.all(2),
                                                   child: Icon(
                                                     Icons.people,
                                                     color: Theme.of(context).primaryColor,
                                                   ),
                                                 ),
                                                 Text(
-                                                  '${widget._event.volunteersLimit}',
-                                                  overflow: TextOverflow.fade,
-                                                  maxLines: 1,
-                                                  softWrap: false,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(5),
-                                                  child: Icon(
-                                                    Icons.how_to_reg,
-                                                    color: Theme.of(context).primaryColor,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '${widget._event.volunteersCount}',
+                                                  'Limite: ${widget._event.volunteersLimit}',
                                                   overflow: TextOverflow.fade,
                                                   maxLines: 1,
                                                   softWrap: false,
@@ -210,10 +202,47 @@ class _EventCardState extends State<EventCard> {
                                             ),
                                           ],
                                         ),
+                                        widget._option != EventCardOptions.current &&
+                                                widget._event.volunteersLimit! > widget._event.volunteersCount!
+                                            ? Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(2),
+                                                    child: Icon(
+                                                      Icons.perm_contact_cal_outlined,
+                                                      color: Theme.of(context).primaryColor,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'Solicitações: ${widget._event.requestsCount!}',
+                                                    overflow: TextOverflow.fade,
+                                                    maxLines: 1,
+                                                    softWrap: false,
+                                                  ),
+                                                ],
+                                              )
+                                            : const Row(),
                                         Row(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(2),
+                                              child: Icon(
+                                                Icons.how_to_reg,
+                                                color: Theme.of(context).primaryColor,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Participantes: ${widget._event.volunteersCount!}',
+                                              overflow: TextOverflow.fade,
+                                              maxLines: 1,
+                                              softWrap: false,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(2),
                                               child: Icon(
                                                 Icons.calendar_month,
                                                 color: Theme.of(context).primaryColor,
@@ -252,4 +281,4 @@ class _EventCardState extends State<EventCard> {
   }
 }
 
-enum EventCardOptions { current, upcoming, ended }
+enum EventCardOptions { current, upcoming, ended, exibition }

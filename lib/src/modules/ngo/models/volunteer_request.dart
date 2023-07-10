@@ -15,6 +15,6 @@ class VolunteerRequest {
     volunteer_id = json['volunteer_id'];
     volunteer_name = json['volunteer_name'];
     volunteer_email = json['volunteer_email'];
-    profile_image = '${ApiParams.s3BucketBaseUrl}/${json['userId']}.jpg';
+    profile_image = '${ApiParams.s3BucketBaseUrl}/${json['profile_image']}.jpg';
   }
 }

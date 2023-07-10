@@ -67,9 +67,7 @@ class AuthService {
           ),
         );
       }
-    } on Exception {
-      print("no login");
-    }
+    } on Exception {}
 
     return null;
   }

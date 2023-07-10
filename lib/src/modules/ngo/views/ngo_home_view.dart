@@ -22,17 +22,10 @@ class _NgoHomeViewState extends State<NgoHomeView> {
     super.initState();
   }
 
-  Future<void> loadAddressDescription() async {
+  Future<void> _loadAddressDescription() async {
     NgoInfo ngo = NgoService.ngo!;
     _addressDescription = await GeoCoderUtils.getAddressByLatLng(ngo.latitude, ngo.longitude);
     setState(() {});
-  }
-
-  void _showSnackBar() {
-    const snackBar = SnackBar(
-      content: Text('Não foi possível carregar a página inicial.'),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -44,10 +37,13 @@ class _NgoHomeViewState extends State<NgoHomeView> {
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!) {
-              loadAddressDescription();
+              _loadAddressDescription();
               return listViewNgo(context);
             } else {
-              _showSnackBar();
+              const snackBar = SnackBar(
+                content: Text('Não foi possível carregar a página inicial.'),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
               return const Center(
                 child: CircularProgressIndicator(),
               );
@@ -66,6 +62,7 @@ class _NgoHomeViewState extends State<NgoHomeView> {
     NgoInfo ngo = NgoService.ngo!;
     int allevents = ngo.currentEvents.length + ngo.upcomingEvents.length + ngo.endedEvents.length;
     return ListView(
+      shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [
         const SizedBox(height: 10),
@@ -83,8 +80,8 @@ class _NgoHomeViewState extends State<NgoHomeView> {
           ],
         ),
         const SizedBox(height: 10),
-        infoWidget(context, ngo.averageRating, ngo.currentEvents.length, allevents),
-        const SizedBox(height: 50),
+        infoNgoWidget(context, ngo.averageRating, ngo.currentEvents.length, allevents, ngo.categories),
+        const SizedBox(height: 10),
         Container(
           margin: const EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
           child: ElevatedButton(
@@ -130,9 +127,8 @@ class _NgoHomeViewState extends State<NgoHomeView> {
                   style: const TextStyle(color: Colors.grey),
                 ),
               ],
-              // TO-DO! // EXIBIR CATEGORIAS
             ),
-          )
+          ),
         ],
       );
 }

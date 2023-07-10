@@ -24,18 +24,20 @@ AppBar buildAppBar(BuildContext context) {
           ),
         ],
       ),
-    ).then((exit) async {
-      if (exit == null) {
-        return;
-      }
-      if (exit) {
-        Navigator.pushReplacementNamed(context, LoginView.route);
-        await AuthService.logOut();
-      } else {
-        Navigator.pushReplacementNamed(context, NgoView.route);
-        //Navigator.pop(context);
-      }
-    });
+    ).then(
+      (exit) async {
+        if (exit == null) {
+          return;
+        }
+        if (exit) {
+          Navigator.pushReplacementNamed(context, LoginView.route);
+          await AuthService.logOut();
+        } else {
+          Navigator.pushReplacementNamed(context, NgoView.route);
+          //Navigator.pop(context);
+        }
+      },
+    );
   }
 
   return AppBar(

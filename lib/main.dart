@@ -6,6 +6,7 @@ import 'package:wechange_mobile/src/modules/auth/views/signup_view.dart';
 import 'package:wechange_mobile/src/modules/auth/views/volunteer_signup_view.dart';
 import 'package:wechange_mobile/src/modules/common/models/event_info.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/event_edit_view.dart';
+import 'package:wechange_mobile/src/modules/ngo/views/event_requests_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/new_event_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_events_view.dart';
 import 'package:wechange_mobile/src/modules/ngo/views/ngo_view.dart';
@@ -46,8 +47,12 @@ class MyApp extends StatelessWidget {
               return const LoginView();
             }
           } else {
-            //return const LoginView();
-            return const LinearProgressIndicator();
+            return Container(
+              color: Colors.white,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           }
         },
       ),
@@ -63,9 +68,11 @@ class MyApp extends StatelessWidget {
         NgoEventsView.route: (context) => const NgoEventsView(),
         NewEventView.route: (context) => const NewEventView(),
         EventEditView.route: (context) => EventEditView(ModalRoute.of(context)!.settings.arguments as EventInfo),
+        EventRequestsView.route: (context) =>
+            EventRequestsView(ModalRoute.of(context)!.settings.arguments as EventInfo),
+        VolunteerView.route: (context) => VolunteerView(ModalRoute.of(context)!.settings.arguments as String),
 
         //Volunteer-Side
-        VolunteerView.route: (context) => const VolunteerView(),
       },
     );
   }

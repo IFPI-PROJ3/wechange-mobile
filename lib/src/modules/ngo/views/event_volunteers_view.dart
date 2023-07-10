@@ -4,33 +4,32 @@ import 'package:wechange_mobile/src/modules/common/widgets/request_card.dart';
 import 'package:wechange_mobile/src/modules/ngo/models/volunteer_request.dart';
 import 'package:wechange_mobile/src/modules/ngo/services/event_volunteer_service.dart';
 
-class EventRequestsView extends StatefulWidget {
-  const EventRequestsView(this._event, {super.key});
+class EventVolunteersView extends StatefulWidget {
+  const EventVolunteersView(this._event, {super.key});
 
   //final Function eventCallback;
   final EventInfo _event;
 
-  static String route = '/ngo-event-request-view';
+  static String route = '/ngo-event-participants-view';
 
   @override
-  State<EventRequestsView> createState() => _EventRequestsState();
+  State<EventVolunteersView> createState() => _EventVolunteersViewState();
 }
 
-class _EventRequestsState extends State<EventRequestsView> {
+class _EventVolunteersViewState extends State<EventVolunteersView> {
   @override
   void initState() {
     super.initState();
   }
 
   void callback() {
-    Navigator.pop(context, true);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<VolunteerRequest>>(
-      future: EventVolunteerService.getEventRequests(widget._event),
+      future: EventVolunteerService.getEventVolunteers(widget._event),
       builder: (BuildContext context, AsyncSnapshot<List<VolunteerRequest>> snapshot) {
         if (snapshot.hasData) {
           return buildRequestsList(context, snapshot.data!);
@@ -51,8 +50,8 @@ class _EventRequestsState extends State<EventRequestsView> {
       appBar: AppBar(
         title: Text(
           requestList.length == 1
-              ? '${requestList.length.toString()} Solicitação'
-              : '${requestList.length.toString()} Solicitações',
+              ? '${requestList.length.toString()} Participante'
+              : '${requestList.length.toString()} Participantes',
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.transparent,
@@ -63,7 +62,7 @@ class _EventRequestsState extends State<EventRequestsView> {
       ),
       body: ListView(
         children: [
-          ...requestList.map((request) => RequestCard(callback, request, RequestCardOptions.undefined)).toList(),
+          ...requestList.map((request) => RequestCard(callback, request, RequestCardOptions.confirmed)).toList(),
         ],
       ),
     );

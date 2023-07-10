@@ -15,8 +15,7 @@ class EventInfo {
   String? createdAt;
   String? updatedAt;
   String? imageThumb;
-
-  String? imageBase64ToUpload;
+  bool? canBeReviewed;
 
   EventInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -32,13 +31,6 @@ class EventInfo {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     imageThumb = '${ApiParams.s3BucketBaseUrl}/${json['image_thumb']}.jpg';
-  }
-
-  Map<String, dynamic> toUpdateJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['title'] = title;
-    data['description'] = description;
-    data['image_thumb'] = imageBase64ToUpload;
-    return data;
+    canBeReviewed = json['can_be_reviewed'];
   }
 }
